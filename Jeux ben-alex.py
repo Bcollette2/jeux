@@ -18,7 +18,10 @@ while running:
             position_personage[0] = position_personage[0] - 10
         elif event.key == pygame.K_RIGHT:
             position_personage[0] = position_personage[0] + 10
-
+    if nouvelleballe(position_cercle) = True:
+        position_cercle = (Random(),0)
+    
+   
     screen.fill((255, 255, 255))
 
     pygame.draw.circle(screen, (0, 0, 255), position_cercle, 75)
@@ -31,3 +34,17 @@ pygame.quit()
 def Random (chiffre):
     randint = random.random()
     return randint * chiffre 
+
+def tempsattack (tempsattack):
+  if tempsattack < 500:
+    tempsattack = return True
+  else :
+      return False 
+def nouvelleballe (position_balle):
+    if position_balle[1] >= 500:
+        return True
+    else:
+        return False
+    
+
+
