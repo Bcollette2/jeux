@@ -22,3 +22,9 @@ while running:
     pygame.display.flip()       
 
 pygame.quit()
+
+def Random (chiffre):
+    randint = random.random()
+return randint * chiffre 
+
+
