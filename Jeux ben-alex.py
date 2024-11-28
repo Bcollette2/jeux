@@ -14,6 +14,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        elif event.type == pygame.K_LEFT:
+            position_personage[0] = position_personage[0] - 10
+        elif event.key == pygame.K_RIGHT:
+            position_personage[0] = position_personage[0] + 10
 
     screen.fill((255, 255, 255))
 
@@ -26,6 +30,4 @@ pygame.quit()
 
 def Random (chiffre):
     randint = random.random()
-return randint * chiffre 
-
-
+    return randint * chiffre 
