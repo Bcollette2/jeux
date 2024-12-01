@@ -15,6 +15,8 @@ vies2 = 3
 position_personage = (100, 400)
 position_personage2 = (300, 400)
 position_rectangle = (260, 0)
+coeur = pygame.image.load("./IMG_3547.png").convert_alpha()
+coeur = pygame.transform.scale(coeur, (50, 50))
 
 
 def rrandom(chiffre):
@@ -38,6 +40,8 @@ def nouvelleobstacle(position_balle):
 font = pygame.font.Font(None, 32)
 text = font.render('Garçon a gagné. R pour recommencer', True, (0, 0, 128), (128, 0, 0))
 text2 = font.render('Fille a gagné. R pour recommencer', True, (0, 0, 128), (128, 0, 0))
+gars = font.render('Vies Gars', True, (0, 0, 128))
+fille = font.render('Vies Fille', True, (0, 0, 128))
 runningRight = False
 runningLeft = False
 runningRight2 = False
@@ -46,7 +50,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.KEYDOWN:
+        elif event.type ==   pygame.KEYDOWN:
             if event.key == pygame.K_a:
                 runningRight = True
             elif event.key == pygame.K_d:
@@ -55,9 +59,9 @@ while running:
                 runningRight2 = True
             elif event.key == pygame.K_RIGHT:
                 runningLeft2 = True
-        elif event.type == pygame.K_r:
-            vies = 3
-            vies2 = 3
+            elif event.key == pygame.K_r:
+              vies = 3
+              vies2 = 3
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
                 runningRight = False
@@ -95,7 +99,28 @@ while running:
     screen.blit(personage2, position_personage2)
     if vies <= 0:
         screen.blit(text2, (100, 200))
+
     elif vies2 <= 0:
         screen.blit(text, (100, 200))
+    if vies == 1:
+        screen.blit(coeur, (0, 20))
+    elif vies == 2: 
+        screen.blit(coeur, (0, 20))
+        screen.blit(coeur, (40, 20))
+    elif vies == 3: 
+        screen.blit(coeur, (00, 20))
+        screen.blit(coeur, (40, 20))
+        screen.blit(coeur, (80, 20))
+    if vies2 == 1:
+        screen.blit(coeur, (380, 20))
+    elif vies2 == 2: 
+        screen.blit(coeur, (420, 20))
+        screen.blit(coeur, (380, 20))
+    elif vies2 == 3: 
+        screen.blit(coeur, (380, 20))
+        screen.blit(coeur, (460, 20))
+        screen.blit(coeur, (420, 20))
+    screen.blit(gars, (0, 0))
+    screen.blit(fille, (400, 0))
     pygame.display.flip()
     clock.tick(fps)
