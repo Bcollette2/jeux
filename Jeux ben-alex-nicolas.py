@@ -3,8 +3,9 @@ import random
 
 pygame.init()
 clock = pygame.time.Clock()
+TAILLEECRAN = [500, 500]
 fps = 60
-screen = pygame.display.set_mode([500, 500])
+screen = pygame.display.set_mode(TAILLEECRAN)
 running = True
 personage = pygame.image.load("./IMG_3545.png").convert_alpha()
 personage = pygame.transform.scale(personage, (50, 80))
