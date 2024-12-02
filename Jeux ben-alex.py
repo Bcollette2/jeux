@@ -3,7 +3,7 @@ import random
 
 pygame.init()
 clock = pygame.time.Clock()
-fps = 600
+fps = 60
 screen = pygame.display.set_mode([500, 500])
 running = True
 personage = pygame.image.load("./IMG_3545.png").convert_alpha()
@@ -15,6 +15,7 @@ vies2 = 3
 position_personage = (100, 400)
 position_personage2 = (300, 400)
 position_rectangle = (260, 0)
+position_rectangle2 = (340, 0)
 coeur = pygame.image.load("./IMG_3547.png").convert_alpha()
 coeur = pygame.transform.scale(coeur, (50, 50))
 
@@ -22,13 +23,6 @@ coeur = pygame.transform.scale(coeur, (50, 50))
 def rrandom(chiffre):
     randint = random.random()
     return randint * chiffre
-
-
-def tempsattack(tempsattack):
-    if tempsattack < 500:
-        return True
-    else:
-        return False
 
 
 def nouvelleobstacle(position_balle):
@@ -72,29 +66,42 @@ while running:
             elif event.key == pygame.K_RIGHT:
                 runningLeft2 = False
     if runningLeft and position_personage[0] < 450:
-        position_personage = (position_personage[0] + 1, position_personage[1])
+        position_personage = (position_personage[0] + 8, position_personage[1])
     elif runningRight and position_personage[0] > 0:
-        position_personage = (position_personage[0] - 1, position_personage[1])
+        position_personage = (position_personage[0] - 8, position_personage[1])
     if runningLeft2 and position_personage2[0] < 450:
-        position_personage2 = (position_personage2[0] + 1, position_personage2[1])
+        position_personage2 = (position_personage2[0] + 8, position_personage2[1])
     elif runningRight2 and position_personage2[0] > 0:
-        position_personage2 = (position_personage2[0] - 1, position_personage2[1])
+        position_personage2 = (position_personage2[0] - 8, position_personage2[1])
     rectanglejoueur1 = pygame.Rect(position_personage[0], position_personage[1], 50, 80)
     rectanglejoueur2 = pygame.Rect(position_personage2[0], position_personage2[1], 50, 80)
     rectangle2 = pygame.Rect(position_rectangle[0], position_rectangle[1], 75, 75)
+    rectangle3 = pygame.Rect(position_rectangle2[0], position_rectangle2[1], 75, 75)
     if rectanglejoueur1.colliderect(rectangle2):
         position_rectangle = (rrandom(500), 0)
         vies -= 1
     if rectanglejoueur2.colliderect(rectangle2):
         position_rectangle = (rrandom(500), 0)
         vies2 -= 1
+    if rectanglejoueur1.colliderect(rectangle3):
+        position_rectangle2 = (rrandom(500), 0)
+        vies -= 1
+    if rectanglejoueur2.colliderect(rectangle3):
+        position_rectangle2 = (rrandom(500), 0)
+        vies2 -= 1
     screen.fill((255, 255, 255))
     if nouvelleobstacle(position_rectangle):
         position_rectangle = (rrandom(500), 0)
+    if nouvelleobstacle(position_rectangle2):
+        position_rectangle2 = (rrandom(500), 0)
     pygame.draw.rect(
         screen, (0, 0, 255), (position_rectangle[0], position_rectangle[1], 75, 75)
     )
-    position_rectangle = (position_rectangle[0], position_rectangle[1] + 0.5)
+    pygame.draw.rect(
+        screen, (0, 0, 255), (position_rectangle2[0], position_rectangle2[1], 75, 75)
+    )
+    position_rectangle = (position_rectangle[0], position_rectangle[1] + 7.5)
+    position_rectangle2 = (position_rectangle2[0], position_rectangle2[1] + 7.5)
     screen.blit(personage, position_personage)
     screen.blit(personage2, position_personage2)
     if vies <= 0:
